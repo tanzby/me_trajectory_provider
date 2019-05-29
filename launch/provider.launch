@@ -1,0 +1,19 @@
+<launch>
+<node pkg="me_trajectory_provider" type="me_trajectory_provider" name="me_trajectory_provider" output="screen">
+
+    <param name="lane_curve_sample_distance" value="20"/>   <!-- mobileye 提取曲线使用的长度 -->
+    <param name="lane_curve_sample_step" value="0.2"/>      <!-- mobileye 提供曲线中采样步长 -->
+    <param name="scan_lane_angle_diff" value="0.05235"/>    <!-- 左右车道方向差距  3 * M_PI / 180.0 -->
+    <param name="add_keyframe_angle_diff" value="0.1047"/>  <!-- 添加关键帧的最大方向误差  6 * M_PI / 180.0     -->
+    <param name="add_keyframe_distance" value="4"/>         <!-- 添加关键帧的最小距离 -->
+    <param name="max_keyframe_size" value="3"/>             <!-- 最大关键帧数量 -->
+    <param name="keep_back_distance" value="5.0"/>          <!-- 保持尾部点的最大区域距离 -->
+    <param name="trajectory_sample_distance" value="0.4"/>  <!-- 发布的引导线点采样间隔 -->
+    <param name="max_reset_distance" value="8"/>            <!-- 执行清除行为的最大帧间（关键帧与扫描帧）差距  -->
+
+    <param name="tran_yaw" value="0"/>
+    <param name="tran_x" value="2.0"/>
+    <param name="tran_y" value="0"/>
+
+</node>
+</launch>
