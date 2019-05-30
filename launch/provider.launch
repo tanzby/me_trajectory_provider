@@ -12,7 +12,7 @@
     <param name="max_reset_distance" value="8"/>            <!-- 执行清除行为的最大帧间（关键帧与扫描帧）差距  -->
 
     <param name="tran_yaw" value="0"/>
-    <param name="tran_x" value="2.0"/>
+    <param name="tran_x" value="-2.0"/>
     <param name="tran_y" value="0"/>
 
 </node>

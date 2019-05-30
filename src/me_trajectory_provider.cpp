@@ -412,11 +412,11 @@ class TrajectoryProvider
 
     Eigen::Matrix3f EularAngleToMatrix(float yaw, float pitch, float roll)
     {
-        Eigen::AngleAxisd rollAngle(roll, Eigen::Vector3d::UnitZ());
-        Eigen::AngleAxisd yawAngle(yaw, Eigen::Vector3d::UnitY());
-        Eigen::AngleAxisd pitchAngle(pitch, Eigen::Vector3d::UnitX());
-
-        Eigen::Quaterniond q = rollAngle * yawAngle * pitchAngle;
+        Eigen::AngleAxisd yawAngle(yaw, Eigen::Vector3d::UnitZ());
+        Eigen::AngleAxisd pitchAngle(pitch, Eigen::Vector3d::UnitY());
+        Eigen::AngleAxisd rollAngle(yaw, Eigen::Vector3d::UnitX());
+        
+        Eigen::Quaterniond q = yawAngle * pitchAngle * rollAngle;
 
         return q.matrix().cast<float>();
     }
@@ -438,7 +438,7 @@ class TrajectoryProvider
         me_to_imu.block(0, 0, 3, 3) = EularAngleToMatrix(me_to_imu_yaw, 0, 0);
         me_to_imu.block(0, 3, 3, 1) = Eigen::Vector3f(me_to_imu_x, me_to_imu_y, 0);
 
-        return me_to_imu*pose;
+        return pose*me_to_imu;
     }
 
     void me_lane_callback(const nav_msgs::OdometryConstPtr &nav_msg,
@@ -549,7 +549,7 @@ public:
 
         nh.param<double>("tran_yaw", me_to_imu_yaw, 0);
         ROS_INFO("transform me to imu: yaw: %lf", me_to_imu_yaw);
-        nh.param<double>("tran_x", me_to_imu_x, 2.0);
+        nh.param<double>("tran_x", me_to_imu_x, -2.0);
         ROS_INFO("transform me to imu: x: %lf", me_to_imu_x);
         nh.param<double>("tran_y", me_to_imu_y, 0);
         ROS_INFO("transform me to imu: y: %lf", me_to_imu_y);
