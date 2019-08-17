@@ -414,7 +414,7 @@ class TrajectoryProvider
     {
         Eigen::AngleAxisd yawAngle(yaw, Eigen::Vector3d::UnitZ());
         Eigen::AngleAxisd pitchAngle(pitch, Eigen::Vector3d::UnitY());
-        Eigen::AngleAxisd rollAngle(yaw, Eigen::Vector3d::UnitX());
+        Eigen::AngleAxisd rollAngle(roll, Eigen::Vector3d::UnitX());
         
         Eigen::Quaterniond q = yawAngle * pitchAngle * rollAngle;
 
